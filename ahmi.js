@@ -14,7 +14,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
         const isCmd2 = body.startsWith(prefix)
         const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
-        const pushname = m.pushName || "No Name"
+        const pushname = m.pushName || "Miku Nakano"
         const botNumber = await client.decodeJid(client.user.id)
         const itsMe = m.sender == botNumber ? true : false
         let text = q = args.join(" ")
@@ -57,7 +57,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
     if (setting.autoAI) {
         if (budy) {
             try {
-            if (setting.keyopenai === 'ISI_APIKEY_OPENAI_DISINI') return reply('Apikey belum diisi\n\nSilahkan isi terlebih dahulu apikeynya di file key.json\n\nApikeynya bisa dibuat di website: https://beta.openai.com/account/api-keys')
+            if (setting.keyopenai === 'Enter you OpenAI API key') return reply('Enter API key from website: https://beta.openai.com/account/api-keys')
             const configuration = new Configuration({
               apiKey: setting.keyopenai, 
             });
@@ -75,7 +75,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
             m.reply(`${response.data.choices[0].text}\n\n`)
             } catch(err) {
                 console.log(err)
-                m.reply('Maaf, sepertinya ada yang error')
+                m.reply('Error')
             }
         }
     }
@@ -85,8 +85,8 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
             switch(command) { 
                 case 'ai':
                     try {
-                        if (setting.keyopenai === 'ISI_APIKEY_OPENAI_DISINI') return reply('Api key has not been filled in\n\nPlease fill in the apikey first in the key.json file\n\nThe apikey can be created in website: https://beta.openai.com/account/api-keys')
-                        if (!text) return reply(`Chat dengan AI.\n\nContoh:\n${prefix}${command} Apa itu resesi`)
+                        if (setting.keyopenai === 'Enter you OpenAI API key') return reply('Enter API key from website: https://beta.openai.com/account/api-keys')
+                        if (!text) return reply(`Chat GPT AI.\n\nContoh:\n${prefix}${command} Apa itu resesi`)
                         const configuration = new Configuration({
                             apiKey: setting.keyopenai,
                         });
@@ -104,7 +104,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
                         m.reply(`${response.data.choices[0].text}\n\n`)
                     } catch (err) {
                         console.log(err)
-                        m.reply('Maaf, sepertinya ada yang error')
+                        m.reply('Error')
                     }
                     break
                 default:{
